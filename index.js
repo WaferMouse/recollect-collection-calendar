@@ -4,11 +4,11 @@ const express = require("express");
 
 var app = express();
 var https = require('https');
+var utcTwoDaysAgo = new Date(Date.now() - (86400000 * 2)).toJSON().slice(0,10);
+var utcOneYearFromNow = new Date(Date.now() + (86400000 * 365)).toJSON().slice(0,10);
 
 app.get("/:place",async function(request,response){
     response.type('text/calendar');
-    var utcTwoDaysAgo = new Date(Date.now() - (86400000 * 2)).toJSON().slice(0,10);
-    var utcOneYearFromNow = new Date(Date.now() + (86400000 * 365)).toJSON().slice(0,10);
     var getURL = "https://api.eu.recollect.net/api/places/" + request.params.place + "/services/50003/events?hide=reminder_only&nomerge=true&locale=en-GB&after=" + utcTwoDaysAgo + "&before=" + utcOneYearFromNow;
     let out = '';
     out = goFetch(getURL);
