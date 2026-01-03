@@ -38,16 +38,14 @@ function veventMaker(event_in){
     var name = flags['name'];
     var subject = flags['subject'];
     var uid = dtStart + name + "@recollect.jocely.net";
-    var prodId = "-//hacksw/handcal//NONSGML v1.0//EN";
-    var version = "2.0";
-    var desc = name;
+    var desc = flags['html_message'].replace(/(<([^>]+)>)/ig, '');
     return(
 `BEGIN:VEVENT
 UID:` + uid + `
 DTSTAMP:` + stamp + `
 DTSTART:` + dtStart + `
 SUMMARY:` + subject + `
-DESCRIPTION:` + subject + `
+DESCRIPTION:` + desc + `
 END:VEVENT`
     )
 }
