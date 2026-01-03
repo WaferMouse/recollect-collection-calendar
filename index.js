@@ -1,7 +1,5 @@
 const express = require("express");
 
-// force a build lol
-
 var app = express();
 var https = require('https');
 var utcTwoDaysAgo = new Date(Date.now() - (86400000 * 2)).toJSON().slice(0,10);
