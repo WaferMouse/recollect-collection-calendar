@@ -89,7 +89,7 @@ function findPaletteEntry(rgb) {
 }
 
 for (let i = 0; i < 0x1000000; i++) {
-    colorMap.push(findPaletteEntry(toColor(i))['emoji']);
+    colorMap.push(findPaletteEntry(toColor(i)));
 }
 
 app.get("/:place",async function(request,response){
@@ -124,16 +124,18 @@ function veventMaker(event_in){
     var subject = flags['subject'];
     var uid = dtStart + name + "@recollect.jocely.net";
     var desc = flags['html_message'].replace(/(<([^>]+)>)/ig, '');
-    var color = colorMap[parseInt(flags['color'].slice(1), 16)];
-    return(
-`BEGIN:VEVENT
-UID:` + uid + `
-DTSTAMP:` + stamp + `
-DTSTART:` + dtStart + `
-SUMMARY:` + color + ` ` + subject + `
-DESCRIPTION:` + desc + `
-END:VEVENT`
-    )
+    var emoji = colorMap[parseInt(flags['color'].slice(1), 16)]['emoji'];
+    var color = colorMap[parseInt(flags['color'].slice(1), 16)]['name']
+    return([
+        `BEGIN:VEVENT`,
+        `UID:` + uid,
+        `DTSTAMP:` + stamp,
+        `DTSTART:` + dtStart,
+        `SUMMARY:` + emoji + ` ` + subject,
+        `DESCRIPTION:` + desc,
+        `COLOR:` + color,
+        `END:VEVENT`,
+    ].join('\n'))
 }
 
 function vcalendarMaker(events_in){
