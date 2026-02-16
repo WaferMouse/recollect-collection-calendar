@@ -263,51 +263,14 @@ function findPaletteEntry(rgb, colors) {
     return(best_candidate);
 }
 
-console.log("generating colormaps...")
+console.log("generating colormaps...");
 
 for (let i = 0; i < 0x1000000; i++) {
     colorMap.push(findPaletteEntry(toColor(i), COLORS));
     emojiMap.push(findPaletteEntry(toColor(i), EMOJI));
 }
 
-console.log("generated colormaps")
-
-function roughSizeOfObject(object) {
-  const objectList = [];
-  const stack = [object];
-  let bytes = 0;
-
-  while (stack.length) {
-    const value = stack.pop();
-
-    switch (typeof value) {
-      case 'boolean':
-        bytes += 4;
-        break;
-      case 'string':
-        bytes += value.length * 2;
-        break;
-      case 'number':
-        bytes += 8;
-        break;
-      case 'object':
-        if (!objectList.includes(value)) {
-          objectList.push(value);
-          for (const prop in value) {
-            if (value.hasOwnProperty(prop)) {
-              stack.push(value[prop]);
-            }
-          }
-        }
-        break;
-    }
-  }
-
-  return bytes;
-}
-
-console.log(`emojiMap size: ` + roughSizeOfObject(emojiMap));
-console.log(`colorMap size: ` + roughSizeOfObject(colorMap));
+console.log("generated colormaps");
 
 app.get("/:place",async function(request,response){
     response.type('text/calendar');
