@@ -56,6 +56,31 @@ const EMOJI = [
         'rgb': 0x808080,
         'emoji': '🪨'
     },
+    {
+        'name': 'light skin',
+        'rgb': 0xffd7c2,
+        'emoji': '🏻'
+    },
+    {
+        'name': 'med light skin',
+        'rgb': 0xeebfaa,
+        'emoji': '🏼'
+    },
+    {
+        'name': 'medium skin',
+        'rgb': 0xc68d7b,
+        'emoji': '🏽'
+    },
+    {
+        'name': 'med dark skin',
+        'rgb': 0x966661,
+        'emoji': '🏾'
+    },
+    {
+        'name': 'dark skin',
+        'rgb': 0x573739,
+        'emoji': '🏿'
+    },
 ]
 
 
